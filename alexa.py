@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 import requests
 import difflib
+import re
 import datetime
 import xmltodict
 import myawis
@@ -120,7 +121,8 @@ def update_page(page):
 			current_alexa = "=".join(alexa.split("=")[1:])
 			print("Current alexa: {}".format(current_alexa))
 			print("New alexa:     {}".format(new_alexa))
-			newtext = page.text.replace(current_alexa, new_alexa)
+			#newtext = page.text.replace(current_alexa, new_alexa)
+			newtext = re.sub(r"\|\s*alexa\s*=\s*{}".format(re.escape(current_alexa)), lambda m: "| alexa = {}".format(new_alexa), page.text)
 			import sys
 			sys.stdout.writelines(difflib.context_diff(list(map(lambda s: s+"\n", page.text.split("\n"))), list(map(lambda s: s+"\n", newtext.split("\n")))))
 			print()
