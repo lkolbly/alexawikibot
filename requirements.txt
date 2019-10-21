@@ -8,5 +8,5 @@ myawis==0.2.4
 pkg-resources==0.0.0
 pywikibot==3.0.20181223.dev0
 requests==2.21.0
-urllib3==1.24.1
+urllib3==1.24.2
 xmltodict==0.11.0
